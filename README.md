@@ -27,7 +27,8 @@ pip install -r requirements.txt
 
 python main.py
 
-## 🚀 Pipeline Overview
+```bash
+##  Pipeline Overview
 
 The pipeline executes the following steps:
 
