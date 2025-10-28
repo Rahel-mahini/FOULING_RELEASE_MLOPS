@@ -20,14 +20,16 @@ The study focuses on developing quantitative structure–activity relationship (
 Clone this repository:
 
 ```bash
-git clone https://github.com/yourusername/FOULING_RELEASE_MLOPS.git
+git clone https://github.com/Rahel-mahini/FOULING_RELEASE_MLOPS
 cd FOULING_RELEASE_MLOPS
 
 pip install -r requirements.txt
 
 python main.py
 
-```bash
+```
+
+
 ##  Pipeline Overview
 
 The pipeline executes the following steps:
