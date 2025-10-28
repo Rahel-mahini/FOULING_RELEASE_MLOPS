@@ -5,13 +5,12 @@ import pandas as pd
 from src import (
     generate_combinatorial_descriptors,
     split_train_test,
-    preprocess_data,
+    normalize_features,
     select_top_features,
     train_models,
-    evaluate_model, 
+    evaluate_model,
     save_model
 )
-
 
 def load_config(config_path="config.yaml"):
     with open(config_path, "r") as f:
@@ -42,7 +41,7 @@ def main():
     # Step 3: Preprocessing
     # ----------------------------
     print("Step 3: Preprocessing data...")
-    X_train_scaled, X_test_scaled = preprocess_data(X_train, X_test)
+    X_train_scaled, X_test_scaled = normalize_features(X_train, X_test)
     
     # ----------------------------
     # Step 4: Feature Selection

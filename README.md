@@ -20,7 +20,7 @@ The study focuses on developing quantitative structure–activity relationship (
 Clone this repository:
 
 ```bash
-git clone https://github.com/Rahel-mahini/FOULING_RELEASE_MLOPS
+git clone https://github.com/Rahel-mahini/FOULING_RELEASE_MLOPS.git
 cd FOULING_RELEASE_MLOPS
 
 pip install -r requirements.txt
@@ -64,4 +64,4 @@ Contributions are welcome! Please open an issue or pull request with improvement
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the GNU GENERAL PUBLIC LICENSE. See the LICENSE file for details.
