@@ -1,0 +1,22 @@
+data:
+  descriptors_file: "data/descriptors.csv"
+  concentrations_file: "data/components_fractions.csv"
+  output_path: "data/processed/descriptors_combined.csv"
+
+combinatorix:
+  n_workers: 1
+  threads_per_worker: 128
+  memory_limit: "500GB"
+  timeout: 300
+  threshold_const: 0.01
+  threshold_corr: 0.95
+  batch_num: 100000
+
+model:
+  type: "DecisionTreeRegressor"
+  random_state: 42
+  max_depth: 3
+  test_size: 0.2
+
+plots:
+  save_dir: "outputs/plots/"
