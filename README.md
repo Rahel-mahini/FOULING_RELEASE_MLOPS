@@ -15,27 +15,13 @@ The study focuses on developing quantitative structure–activity relationship (
   - Williams plots (leverage vs. standardized residuals)
   - Accumulated Local Effects (ALE) plots
 
-## 📁 Repository Structure
-FOULING_RELEASE_MLOPS/
-├── 01_data_ingestion.py
-├── 02_feature_generation.py # combinatorixPy integration
-├── 03_train_test_split.py
-├── 04_preprocessing.py
-├── 05_feature_selection.py
-├── 06_model_training.py
-├── 07_model_evaluation.py
-├── 08_model_serving.py
-├── main.py # orchestrates the full pipeline
-├── config.yaml # pipeline configuration
-└── requirements.txt
-
 ## ⚙️ Installation
 
 Clone this repository:
 
 ```bash
-git clone https://github.com/yourusername/fouling_release_mlops.git
-cd fouling_release_mlops
+git clone https://github.com/yourusername/FOULING_RELEASE_MLOPS.git
+cd FOULING_RELEASE_MLOPS
 
 pip install -r requirements.txt
 
