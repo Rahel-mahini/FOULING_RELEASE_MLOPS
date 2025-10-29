@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+#step06_model_factory.py
+
 from sklearn.linear_model import LinearRegression, Lasso, Ridge
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor

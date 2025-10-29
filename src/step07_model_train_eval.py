@@ -1,4 +1,5 @@
-# 06_model_training.py
+# -*- coding: utf-8 -*-
+# step07_model_train_eval.py
 import os
 import pandas as pd
 import numpy as np

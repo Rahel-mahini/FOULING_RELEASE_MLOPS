@@ -5,7 +5,7 @@ Created on Mon Oct 27 17:49:10 2025
 @author: RASULEVLAB
 """
 
-# src/02-feature_generation.py
+# step02-feature_generation.py
 from combinatorixPy import initialize_dask_cluster, get_result
 from dask.distributed import Client
 

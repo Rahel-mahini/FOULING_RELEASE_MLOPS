@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Evaluation and visualization: correlation plots, Williams, ALE
-"""
+# step08_visualization.py
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -77,7 +75,8 @@ def evaluate_model(X_train, X_test, y_train, y_train_pred, y_test, y_test_pred, 
         # ---------------- Initialize model ----------------
             # ---------------- Initialize model dynamically ----------------
         model_params = config.get('model', {})
-        model_type = model_params.get('type', 'DecisionTreeRegressor')  # default
+        model_type = model_params['type']
+
         model_mapping = {
             'DecisionTreeRegressor': DecisionTreeRegressor,
             'LinearRegression': LinearRegression,
@@ -87,17 +86,13 @@ def evaluate_model(X_train, X_test, y_train, y_train_pred, y_test, y_test_pred, 
             'SVR': SVR
         }
 
-        if model_type not in model_mapping:
-            raise ValueError(f"Model type {model_type} not implemented.")
-        
-        ModelClass = model_mapping[model_type]
-
-        # Extract parameters dynamically
-        # Remove 'type' key from params
         model_kwargs = {k: v for k, v in model_params.items() if k != 'type'}
-        if 'random_state' not in model_kwargs:
-            model_kwargs['random_state'] = 42  # default random_state if applicable
-        
+
+        # Only add random_state if applicable
+        if model_type in ['RandomForest', 'DecisionTree'] and 'random_state' not in model_kwargs:
+            model_kwargs['random_state'] = 42
+
+        ModelClass = model_mapping[model_type]        
         model = ModelClass(**model_kwargs)
 
         

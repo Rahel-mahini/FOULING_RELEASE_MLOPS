@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-Feature selection using Random Forest importance
-"""
+
+# step05_feature_selection.py
 
 import pandas as pd
 import numpy as np
