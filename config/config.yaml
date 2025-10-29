@@ -12,11 +12,17 @@ combinatorix:
   threshold_corr: 0.95
   batch_num: 100000
 
-model:
-  type: "DecisionTreeRegressor"
-  random_state: 42
-  max_depth: 3
-  test_size: 0.2
+models_config = {
+    'LinearRegression': {'type': 'LinearRegression'},
+    'Lasso': {'type': 'Lasso', 'alpha': 1.0},
+    'Ridge': {'type': 'Ridge', 'alpha': 1.0},
+    'RandomForest_default': {'type': 'RandomForest', 'n_estimators': 100, 'random_state': 42},
+    'RandomForest_simple': {'type': 'RandomForest', 'n_estimators': 50, 'max_depth': 3, 'random_state': 42},
+    'DecisionTree_default': {'type': 'DecisionTree', 'random_state': 42},
+    'DecisionTree_simple': {'type': 'DecisionTree', 'max_depth': 3, 'random_state': 42},
+    'SVR_linear': {'type': 'SVR', 'kernel': 'linear'},
+    'SVR_rbf': {'type': 'SVR', 'kernel': 'rbf'}
+}
 
 plots:
   save_dir: "outputs/plots/"

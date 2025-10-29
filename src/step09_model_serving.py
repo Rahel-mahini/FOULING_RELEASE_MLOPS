@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Serve trained models (example using pickle)
-"""
+# step09_model_serving.py
 
 import pickle
 

@@ -23,6 +23,7 @@ def generate_combinatorial_descriptors(config):
     fractions_file = config['data']['fractions_file']
     output_path = config['data']['output_path']
 
+    
     threshold_const = config['combinatorix']['threshold_const']
     threshold_corr = config['combinatorix']['threshold_corr']
     batch_num = config['combinatorix']['batch_num']

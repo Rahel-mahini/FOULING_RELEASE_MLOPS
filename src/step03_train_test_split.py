@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-Split data into train and test sets
-"""
+
+# step03_train_test_split.py
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
