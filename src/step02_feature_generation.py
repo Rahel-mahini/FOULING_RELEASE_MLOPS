@@ -8,6 +8,7 @@ Created on Mon Oct 27 17:49:10 2025
 # step02-feature_generation.py
 from combinatorixPy import initialize_dask_cluster, get_result
 from dask.distributed import Client
+import os
 
 def generate_combinatorial_descriptors(config):
     """
@@ -20,8 +21,10 @@ def generate_combinatorial_descriptors(config):
     print(" Dask client initialized.")
 
     descriptors_file = config['data']['descriptors_file']
-    fractions_file = config['data']['fractions_file']
+    fractions_file = config['data']['concentrations_file']
+    
     output_path = config['data']['output_path']
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     
     threshold_const = config['combinatorix']['threshold_const']

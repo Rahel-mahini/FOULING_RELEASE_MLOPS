@@ -9,7 +9,7 @@ xgboost>=1.7
 lightgbm>=4.4
 
 # Combinatorial descriptors
-combinatorixPy>=0.1  # replace with actual version if known
+combinatorixPy>=1.1.8  
 dask[distributed]>=2025.10.0
 
 # Model explanation / plotting

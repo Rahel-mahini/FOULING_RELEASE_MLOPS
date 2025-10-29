@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
+import os
 
 def select_k_best_features(X_train, y_train, k=100, output_file=None):
     rf = RandomForestRegressor(random_state=42)
@@ -25,6 +26,12 @@ def select_k_best_features(X_train, y_train, k=100, output_file=None):
     indices = np.argsort(importances)[::-1][:k]
     
     selected_features = X_train.iloc[:, indices]
+
+    # Ensure output directory exists
     if output_file:
+        output_dir = os.path.dirname(output_file)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
         selected_features.to_csv(output_file, index=False)
+
     return selected_features

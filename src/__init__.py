@@ -4,5 +4,5 @@ from .step04_preprocessing import normalize_features
 from .step05_feature_selection import select_k_best_features
 from .step06_model_factory import build_model_from_config
 from .step07_model_train_eval import train_eval_models
-from .step08_visualization import evaluate_model
+from .step08_visualization import visualize_model
 from .step09_model_serving import save_model

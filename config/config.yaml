@@ -1,28 +1,52 @@
 data:
-  descriptors_file: "data/descriptors.csv"
-  concentrations_file: "data/components_fractions.csv"
-  output_path: "data/processed/descriptors_combined.csv"
+  descriptors_file: "Dataset/descriptors.csv"
+  concentrations_file: "Dataset/components_fractions.csv"
+  target_file : "Dataset/AlgeaRemoval110pka.csv"
+  output_path: "Dataset/descriptors_combined"
 
 combinatorix:
   n_workers: 1
-  threads_per_worker: 128
-  memory_limit: "500GB"
+  threads_per_worker: 30
+  memory_limit: "100GB"
   timeout: 300
   threshold_const: 0.01
   threshold_corr: 0.95
   batch_num: 100000
 
-models_config = {
-    'LinearRegression': {'type': 'LinearRegression'},
-    'Lasso': {'type': 'Lasso', 'alpha': 1.0},
-    'Ridge': {'type': 'Ridge', 'alpha': 1.0},
-    'RandomForest_default': {'type': 'RandomForest', 'n_estimators': 100, 'random_state': 42},
-    'RandomForest_simple': {'type': 'RandomForest', 'n_estimators': 50, 'max_depth': 3, 'random_state': 42},
-    'DecisionTree_default': {'type': 'DecisionTree', 'random_state': 42},
-    'DecisionTree_simple': {'type': 'DecisionTree', 'max_depth': 3, 'random_state': 42},
-    'SVR_linear': {'type': 'SVR', 'kernel': 'linear'},
-    'SVR_rbf': {'type': 'SVR', 'kernel': 'rbf'}
-}
+models_config:
+  LinearRegression:
+    type: LinearRegression
+  Lasso:
+    type: Lasso
+    alpha: 1.0
+  Ridge:
+    type: Ridge
+    alpha: 1.0
+  RandomForest_default:
+    type: RandomForestRegressor
+    n_estimators: 100
+    random_state: 42
+  RandomForest_simple:
+    type: RandomForestRegressor
+    n_estimators: 50
+    max_depth: 3
+    random_state: 42
+  DecisionTree_default:
+    type: DecisionTreeRegressor
+    random_state: 42
+  DecisionTree_simple:
+    type: DecisionTreeRegressor
+    max_depth: 3
+    random_state: 42
+  SVR_linear:
+    type: SVR
+    kernel: linear
+  SVR_rbf:
+    type: SVR
+    kernel: rbf
+      
+  test_size: 0.2
+  random_state : 42
 
 plots:
   save_dir: "outputs/plots/"

@@ -15,11 +15,19 @@ from sklearn.model_selection import GridSearchCV
 def loo_r2_score(model, X_train, y_train):
     """Compute LOO R2"""
     loo = LeaveOneOut()
-    predictions = np.zeros_like(y_train, dtype=float)
+    y_true = []
+    y_pred = []
+
     for train_idx, test_idx in loo.split(X_train):
-        model.fit(X_train[train_idx], y_train[train_idx])
-        predictions[test_idx] = model.predict(X_train[test_idx])
-    return r2_score(y_train, predictions)
+        # Use .iloc for row selection
+        model.fit(X_train.iloc[train_idx], y_train.iloc[train_idx])
+        y_hat = model.predict(X_train.iloc[test_idx])
+        y_true.append(y_train.iloc[test_idx].values[0])
+        y_pred.append(y_hat[0])
+
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
+    return r2_score(y_true, y_pred)
 
 def select_k_best_features(X, y, k, output_file):
     """Select top k features using RandomForest importance"""
@@ -80,7 +88,7 @@ def train_eval_models(X_train, y_train, X_test, y_test):
                 rmse_test = np.sqrt(mse_test)
 
                 # LOO R2
-                loo_r2 = loo_r2_score(model, X_train_sel.values, y_train)
+                loo_r2 = loo_r2_score(model, X_train_sel, y_train)
 
                 results_df = pd.concat([
                     results_df,
@@ -102,5 +110,15 @@ def train_eval_models(X_train, y_train, X_test, y_test):
 
     # Sort by R2_test and return top 3 models
     results_df = results_df.sort_values(by='R2_test', ascending=False).reset_index(drop=True)
-    top_model = results_df.iloc[1]
-    return  results_df, top_model
+    top_model_row = results_df.iloc[1]
+
+    top_model_name = top_model_row.iloc[0]
+    print(f"Selected best model: {top_model_name}")
+    top_features = list(top_model_row.iloc[2])
+
+    # Re-train the best model on the full training set
+    best_model = models[top_model_name]
+    best_model.fit(X_train[top_features], y_train)
+
+
+    return  results_df, top_model_row, best_model
