@@ -15,7 +15,7 @@ dask[distributed]>=2025.10.0
 # Model explanation / plotting
 matplotlib>=3.8
 seaborn>=0.12
-alibi>=1.16
+alibi>=0.9.6
 
 # Optional for notebook / interactive use
 jupyterlab>=4.3
