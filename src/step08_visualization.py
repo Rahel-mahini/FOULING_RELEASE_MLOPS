@@ -12,10 +12,13 @@ import warnings
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression, Lasso, Ridge
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.svm import SVR
 from alibi.explainers import ALE, plot_ale
 
-def evaluate_model(X_train, X_test, y_train, y_test, top_features, plots_dir):
+def evaluate_model(X_train, X_test, y_train, y_train_pred, y_test, y_test_pred, plots_dir):
     def correlation_plot(y_train, y_train_pred, y_test, y_test_pred, save_path='correlation_plot.png'):
         plt.figure(figsize=(8,6))
         plt.scatter(y_train, y_train_pred, color='skyblue', label='Training', alpha=0.7, s=100)
@@ -72,16 +75,31 @@ def evaluate_model(X_train, X_test, y_train, y_test, top_features, plots_dir):
         X_train_normalized = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns)
 
         # ---------------- Initialize model ----------------
+            # ---------------- Initialize model dynamically ----------------
         model_params = config.get('model', {})
-        model_type = model_params.get('type', 'DecisionTreeRegressor')
-        random_state = model_params.get('random_state', 42)
-        max_depth = model_params.get('max_depth', 3)
-        
-        if model_type == 'DecisionTreeRegressor':
-            model = DecisionTreeRegressor(random_state=random_state, max_depth=max_depth,
-                                        min_samples_split=2, min_samples_leaf=1)
-        else:
+        model_type = model_params.get('type', 'DecisionTreeRegressor')  # default
+        model_mapping = {
+            'DecisionTreeRegressor': DecisionTreeRegressor,
+            'LinearRegression': LinearRegression,
+            'Lasso': Lasso,
+            'Ridge': Ridge,
+            'RandomForest': RandomForestRegressor,
+            'SVR': SVR
+        }
+
+        if model_type not in model_mapping:
             raise ValueError(f"Model type {model_type} not implemented.")
+        
+        ModelClass = model_mapping[model_type]
+
+        # Extract parameters dynamically
+        # Remove 'type' key from params
+        model_kwargs = {k: v for k, v in model_params.items() if k != 'type'}
+        if 'random_state' not in model_kwargs:
+            model_kwargs['random_state'] = 42  # default random_state if applicable
+        
+        model = ModelClass(**model_kwargs)
+
         
         # ---------------- Fit the model ----------------
         model.fit(X_train_normalized, y_train)

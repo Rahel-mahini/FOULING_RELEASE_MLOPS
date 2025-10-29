@@ -40,7 +40,7 @@ def select_k_best_features(X, y, k, output_file):
     top_features.to_csv(output_file, index=False)
     return top_features
 
-def train_models(X_train, y_train, X_test, y_test):
+def train_eval_models(X_train, y_train, X_test, y_test):
     """Train models on top 3 features combinations and return results_df sorted by R2_test"""
     results_df = pd.DataFrame()
 
@@ -101,5 +101,5 @@ def train_models(X_train, y_train, X_test, y_test):
 
     # Sort by R2_test and return top 3 models
     results_df = results_df.sort_values(by='R2_test', ascending=False).reset_index(drop=True)
-    top_20_models = results_df.head(20)
-    return  results_df, top_20_models
+    top_model = results_df.iloc[1]
+    return  results_df, top_model
