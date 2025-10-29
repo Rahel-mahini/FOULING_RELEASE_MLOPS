@@ -20,7 +20,7 @@ def load_config(config_path="config.yaml"):
 def main():
     # Load configuration
     config_path = os.path.join("config", "config.yaml")
-    config = load_config("config_path")
+    config = load_config(config_path)
     print(config)
     
 
@@ -34,7 +34,7 @@ def main():
     
     print("Step 3: Splitting train/test sets...")
     
-    X = pd.read_csv(descriptors_path])
+    X = pd.read_csv(descriptors_path)
 
     y = pd.read_csv(config['data']['target_file'])
     y = y.iloc[:, -1]
