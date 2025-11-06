@@ -60,7 +60,7 @@ The pipeline executes the following steps:
 - **combinatorixPy**: Tool for combinatorial descriptor generation. (https://www.sciencedirect.com/science/article/pii/S2352711025000275)
 - **Scikit-learn**: [https://scikit-learn.org](https://scikit-learn.org)
 
-## 🔧 Contributing
+##  Contributing
 
 Contributions are welcome! Please open an issue or pull request with improvements, bug fixes, or feature requests.
 
