@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# step08_visualization.py
+# step09_visualization.py
 
 import matplotlib.pyplot as plt
 import numpy as np

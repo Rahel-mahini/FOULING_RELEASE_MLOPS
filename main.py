@@ -2,6 +2,11 @@
 import os
 import yaml
 import pandas as pd
+from sklearn.linear_model import LinearRegression, Lasso, Ridge
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.svm import SVR
+import ast
 from src import (
     generate_combinatorial_descriptors,
     split_train_test,
@@ -10,7 +15,8 @@ from src import (
     build_model_from_config,
     train_eval_models,
     visualize_model,
-    save_model
+    save_model, 
+    run_param_search_parallel
 )
 
 def load_config(config_path="config.yaml"):
@@ -75,7 +81,7 @@ def main():
    
     # Step 6: Model Training and evaluation
     print("Step 5: Training and evaluating models...")
-    results_df, top_model_row, best_model = train_eval_models(X_train_selected, y_train, X_test_selected, y_test)
+    results_df, top_model_row, best_model, top_features = train_eval_models(X_train_selected, y_train, X_test_selected, y_test)
 
     # Save results as CSV
     os.makedirs(config['plots']['save_dir'], exist_ok=True)
@@ -94,14 +100,49 @@ def main():
     models_config = config['models_config']
     best_model_config = models_config[best_model_name]
 
+    # Step 8: Model hyperparametr optimization 
 
-   
-    # Step 8: Model Evaluation & Plots  
+    X_train_selected = X_train_scaled[top_features]
+    X_test_selected= X_test_scaled[top_features]
+    # --- define models ---
+    models_dict = {
+        'LinearRegression': LinearRegression(),
+        'Lasso': Lasso(),
+        'Ridge': Ridge(),
+        'RandomForest': RandomForestRegressor(random_state=42),
+        'DecisionTree': DecisionTreeRegressor(random_state=42),
+        'SVR_linear': SVR(kernel='linear'),
+        'SVR_rbf': SVR(kernel='rbf')
+    }
+
+    # --- define hyperparameter grids ---
+    param_grids = {
+        'Lasso': {'alpha': [0.1, 1.0, 10.0]},
+        'Ridge': {'alpha': [0.1, 1.0, 10.0]},
+        'RandomForest': {'n_estimators': [50, 100, 200], 'max_depth': [None, 5, 10]},
+        'DecisionTree': {'max_depth': [None, 3, 5, 10]},
+        'SVR_linear': {'C': [0.1, 1.0, 10.0]},
+        'SVR_rbf': {'C': [0.1, 1.0, 10.0], 'gamma': ['scale', 'auto']}
+    }
+
+    # --- run hyperparameter search ---
+    results_df, top_model_row, best_model = run_param_search_parallel(
+        X_train_selected, X_test_selected,
+        y_train, y_test,
+        models_dict=models_dict,
+        param_grids=param_grids,
+        n_jobs=-1,
+        random_state=42,
+        results_path="outputs",
+        results_name="hyperparam_results.csv"
+    )
+    
+    # Step 9: Model Evaluation & Plots  
     print("Step 6: Evaluating models and generating plots...")
 
 
 
-    descriptor_cols = list(top_model_row.iloc[2])
+    descriptor_cols = top_model_row["descriptors"].split(",")
     visualize_model(
     X_train=X_train_selected[descriptor_cols],
     X_test=X_test_selected[descriptor_cols],

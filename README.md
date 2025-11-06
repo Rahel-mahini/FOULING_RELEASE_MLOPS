@@ -38,21 +38,23 @@ The pipeline executes the following steps:
 2. **Split the dataset** into training and test sets.
 3. **Preprocess and normalize features** for modeling.
 4. **Select top features**: first top 1000 descriptors, then refine to top 3.
-5. **Train multiple machine learning models** including Decision Trees, Random Forests, Ridge, Lasso, and SVR.
+5. **Train multiple machine learning models**: including Decision Trees, Random Forests, Ridge, Lasso, and SVR.
+6. **Hyperparameter optimization of the top model** automated hyperparameter optimization module to identify the best-performing model configuration based on user-defined parameter grids
 6. **Evaluate models and generate plots**:
    - Correlation plot
    - Williams plot
    - ALE (Accumulated Local Effects) plot
 7. **Save the trained model** for future predictions.
 
-## 📊 Outputs
+##  Outputs
 
 - **Selected Features**: CSV files for top 1000 and top 3 descriptors.
 - **Model Results**: CSV with metrics (R², MAE, MSE, RMSE) for all trained models.
+- **Best model after hyperparameter optimization**: including  CSV with model name, hyperparameter and metrics (R², MAE, MSE, RMSE)
 - **Plots**: Saved in `outputs/plots/` (correlation, Williams, ALE).
 - **Trained Models**: Pickled models ready for serving.
 
-## 📚 References
+##  References
 
 - **Preprint Paper**: [Mixture Descriptors for Fouling Release Prediction](https://www.preprints.org/frontend/manuscript/2560b1d015207b4a6b2fa40763041ae9/download_pub)
 - **combinatorixPy**: Tool for combinatorial descriptor generation. (https://www.sciencedirect.com/science/article/pii/S2352711025000275)
@@ -62,6 +64,6 @@ The pipeline executes the following steps:
 
 Contributions are welcome! Please open an issue or pull request with improvements, bug fixes, or feature requests.
 
-## 📄 License
+##  License
 
 This project is licensed under the GNU GENERAL PUBLIC LICENSE. See the LICENSE file for details.

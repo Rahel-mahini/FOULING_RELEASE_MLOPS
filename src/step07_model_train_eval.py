@@ -113,15 +113,17 @@ def train_eval_models(X_train, y_train, X_test, y_test):
     top_model_row = results_df.iloc[0]
 
     top_model_name = top_model_row.iloc[0]
-    #op_model_name = top_model_row['model_name']    
+    top_model_name = top_model_row['model_name']
+    top_features = list(top_model_row['descriptors'])
+    print(f" Selected best model: {top_model_name} with features {top_features}")
+   
 
     print(f"Selected best model: {top_model_name}")
-    top_features = list(top_model_row.iloc[2])
-    #top_features = list(top_model_row['descriptors'])
+    #top_features = list(top_model_row.iloc[2])
 
     # Re-train the best model on the full training set
     best_model = models[top_model_name]
     best_model.fit(X_train[top_features], y_train)
 
 
-    return  results_df, top_model_row, best_model
+    return  results_df, top_model_row, best_model, top_features
