@@ -15,7 +15,7 @@ def generate_combinatorial_descriptors(config):
     Generate combinatorial descriptors using combinatorixPy with Dask.
     Returns path to generated dataset.
     """
-    cluster = initialize_dask_cluster(config)
+    cluster = initialize_dask_cluster(config['combinatorix'])
     client = Client(cluster)
 
     print(" Dask client initialized.")

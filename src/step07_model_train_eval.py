@@ -110,11 +110,14 @@ def train_eval_models(X_train, y_train, X_test, y_test):
 
     # Sort by R2_test and return top 3 models
     results_df = results_df.sort_values(by='R2_test', ascending=False).reset_index(drop=True)
-    top_model_row = results_df.iloc[1]
+    top_model_row = results_df.iloc[0]
 
     top_model_name = top_model_row.iloc[0]
+    #op_model_name = top_model_row['model_name']    
+
     print(f"Selected best model: {top_model_name}")
     top_features = list(top_model_row.iloc[2])
+    #top_features = list(top_model_row['descriptors'])
 
     # Re-train the best model on the full training set
     best_model = models[top_model_name]
