@@ -9,7 +9,7 @@ The study focuses on developing quantitative structure–activity relationship (
 - **Combinatorial Feature Generation:** Utilizing [`combinatorixPy`](https://github.com/Rahel-mahini/combinatorixPy) to create a comprehensive set of mixture descriptors.
 - **Data Preprocessing:** Scaling, normalization, and handling missing values to prepare features for modeling.
 - **Feature Selection:** Employing statistical methods and model-based importance to identify the most influential descriptors.
-- **Model Training:** Implementing multiple machine learning algorithms (Decision Trees, Random Forest, Linear Models, SVR) to develop predictive models.
+- **Model Training and and Parallel Hyperparamerter Optimization:** Implementing multiple machine learning algorithms (Decision Trees, Random Forest, Linear Models, SVR) and hyperparameter optimization of them to develop predictive models.
 - **Model Evaluation:** Assessing model performance using metrics (R², MAE, RMSE) and visualization techniques such as:
   - Correlation plots (predicted vs. experimental)
   - Williams plots (leverage vs. standardized residuals)
@@ -39,7 +39,7 @@ The pipeline executes the following steps:
 3. **Preprocess and normalize features** for modeling.
 4. **Select top features**: first top 1000 descriptors, then refine to top 3.
 5. **Train multiple machine learning models**: including Decision Trees, Random Forests, Ridge, Lasso, and SVR.
-6. **Hyperparameter optimization of the top model** automated hyperparameter optimization module to identify the best-performing model configuration based on user-defined parameter grids
+6. **Hyperparameter optimization of the top model** automated parallel hyperparameter optimization module using joblib to identify the best-performing model configuration based on user-defined parameter grids
 6. **Evaluate models and generate plots**:
    - Correlation plot
    - Williams plot
