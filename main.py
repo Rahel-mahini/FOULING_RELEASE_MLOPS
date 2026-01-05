@@ -24,7 +24,7 @@ def load_config(config_path="config.yaml"):
         return yaml.safe_load(f)
 
 def main():
-    # Step 1: Load configuration
+    #  Load configuration
     config_path = os.path.join("config", "config.yaml")
     config = load_config(config_path)
     print(config)
