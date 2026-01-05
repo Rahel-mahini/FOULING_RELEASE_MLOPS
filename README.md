@@ -6,6 +6,7 @@ This repository implements a machine learning pipeline designed to predict fouli
 
 The study focuses on developing quantitative structure–activity relationship (QSAR) models to correlate mixture descriptors with fouling release activity, specifically targeting algae removal at 110 kPa of the coating. The methodology encompasses:
 
+- **Load the dataset:** including the target values, componnet fractions and descriptors
 - **Combinatorial Feature Generation:** Utilizing [`combinatorixPy`](https://github.com/Rahel-mahini/combinatorixPy) to create a comprehensive set of mixture descriptors.
 - **Data Preprocessing:** Scaling, normalization, and handling missing values to prepare features for modeling.
 - **Feature Selection:** Employing statistical methods and model-based importance to identify the most influential descriptors.
